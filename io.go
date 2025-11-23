@@ -1,11 +1,11 @@
-package main
+//package main
 
-import "os"
+//import "os"
 
-func main() {
-	// Wrting to StdOut 
-	os.Stdout.WriteString("Hello, 世界!\n")
+//func main() {
+	// Wrting to StdOut
+//	os.Stdout.WriteString("Hello, 世界!\n")
 
 	// Writing to Stderr
-	os.Stderr.WriteString("Error message\n")
-}
+//	os.Stderr.WriteString("Error message\n")
+//}
