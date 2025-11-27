@@ -115,15 +115,12 @@ os.Stdout = original // بازگرداندن
 ### ۳. اسکنر هوشمند (Scanner Split Functions)
 `bufio.Scanner` فقط برای خط به خط خواندن نیست. می‌توانید تابع `Split` خود را بنویسید تا استریم را بر اساس کلمات، بایت‌های خاص، یا پروتکل‌های باینری پارس کنید.
 
-```go
 scanner := bufio.NewScanner(os.Stdin)
 // اسکن کلمه به کلمه
 scanner.Split(bufio.ScanWords)
 for scanner.Scan() {
     fmt.Println("کلمه:", scanner.Text())
 }
-```
-
 ---
 
 ## نتیجه‌گیری
