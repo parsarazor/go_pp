@@ -1,0 +1,10 @@
+package main 
+
+import "fmt"
+
+func main() {
+	ch := make(chan string)
+	ch <- "This a secret message through channel!!"
+	msg := <- ch
+	fmt.Println(msg)
+}
