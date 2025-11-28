@@ -14,13 +14,12 @@ import (
 	"math/rand"
 )
 
-var palette = []color.Color{color.White, color.Black}
+var palette = []color.Color{color.RGBA{0,0,0,255}, color.RGBA{100, 176, 255, 255}}
 
 const (
-	whiteIndex = 0
-	blackIndex = 1
+	whiteIndex  = 0
+	unkwonIndex = 1
 )
-
 func main() {
 
 	//var parsa = []string{"helia", "fatemeh", "sara"}
@@ -129,7 +128,7 @@ func lissajous(out io.Writer) {
 		for t := 0.0; t < cycle*2*math.Pi; t+=res {
 			x := math.Sin(t)
 			y := math.Sin(t*freq + phase)
-			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5), blackIndex)
+			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5), unkwonIndex)
 		}
 		phase += 0.1
 		anim.Delay = append(anim.Delay, delay)
