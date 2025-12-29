@@ -4,14 +4,16 @@ import (
 	//"bufio"
 	//"fmt"
 	//"io/ioutil"
-	"os"
+	"net/http"
+	//	"os"
 	//"strings"
 	"image"
 	"image/color"
 	"image/gif"
-	"io"
+	//"io"
 	"math"
 	"math/rand"
+	"log"
 )
 
 var palette = []color.Color{color.RGBA{0,0,0,255}, color.RGBA{100, 176, 255, 255}}
@@ -107,11 +109,15 @@ func main() {
 	// 	}
 	// }
 	// 1.4 Animated gifs
-	lissajous(os.Stdout)
+	handler := func(w http.ResponseWriter, r *http.Request){
+		lissajous(w)
+	}
+	http.HandleFunc("/", handler)
+	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 
 }
 
-func lissajous(out io.Writer) {
+func lissajous(out http.ResponseWriter) {
 	const (
 		cycle   = 5
 		res     = 0.001
