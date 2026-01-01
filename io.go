@@ -7,5 +7,5 @@
 //	os.Stdout.WriteString("Hello, 世界!\n")
 
 	// Writing to Stderr
-//	os.Stderr.WriteString("Error message\n")
+	//os.Stderr.WriteString("Error message\n")
 //}
