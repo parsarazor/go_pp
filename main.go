@@ -1,27 +1,31 @@
- package main
+package main
 
 import (
 	//"bufio"
 	//"fmt"
 	//"io/ioutil"
-	"net/http"
+	//"net/http"
 	//	"os"
 	//"strings"
 	"image"
 	"image/color"
 	"image/gif"
+
 	//"io"
 	"math"
 	"math/rand"
-	"log"
+
+	//"log"
+	"os"
 )
 
-var palette = []color.Color{color.RGBA{0,0,0,255}, color.RGBA{100, 176, 255, 255}}
+var palette = []color.Color{color.RGBA{0, 0, 0, 255}, color.RGBA{100, 176, 255, 255}}
 
 const (
 	whiteIndex  = 0
 	unkwonIndex = 1
 )
+
 func main() {
 
 	//var parsa = []string{"helia", "fatemeh", "sara"}
@@ -109,15 +113,23 @@ func main() {
 	// 	}
 	// }
 	// 1.4 Animated gifs
-	handler := func(w http.ResponseWriter, r *http.Request){
-		lissajous(w)
-	}
-	http.HandleFunc("/", handler)
-	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+	// Uncomment below to run as HTTP server:
+	// handler := func(w http.ResponseWriter, r *http.Request){
+	// 	lissajous(w)
+	// }
+	// http.HandleFunc("/", handler)
+	// log.Fatal(http.ListenAndServe("localhost:8000", nil))
 
+	// Output GIF to stdout (use with: go run main.go > output.gif)
+	//lissajous(os.Stdout)
+	// func main() {
+    f, _ := os.Create("output.gif")
+    defer f.Close()
+    lissajous(f)  // ← Writes directly to file
 }
 
-func lissajous(out http.ResponseWriter) {
+func lissajous(out *os.File) {
+	// Change parameter to (out http.ResponseWriter) when using HTTP server
 	const (
 		cycle   = 5
 		res     = 0.001
@@ -131,7 +143,7 @@ func lissajous(out http.ResponseWriter) {
 	for i := 0; i < nframes; i++ {
 		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
 		img := image.NewPaletted(rect, palette)
-		for t := 0.0; t < cycle*2*math.Pi; t+=res {
+		for t := 0.0; t < cycle*2*math.Pi; t += res {
 			x := math.Sin(t)
 			y := math.Sin(t*freq + phase)
 			img.SetColorIndex(size+int(x*size+0.5), size+int(y*size+0.5), unkwonIndex)

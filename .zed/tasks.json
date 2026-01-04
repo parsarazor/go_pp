@@ -1,0 +1,43 @@
+[
+  // Generate GIF Files
+  {
+    "label": "Generate Lissajous GIF",
+    "command": "go run main.go > output.gif && open output.gif",
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "tags": ["gif"]
+  },
+  {
+    "label": "Generate gif in each cross platform",
+    "command": "GOOS=linux GOARCH=amd64 go build -o bin/lissajous-linux main.go && GOOS=windows GOARCH=amd64 go build -o bin/lissajous.exe main.go && GOOS=darwin GOARCH=arm64 go build -o bin/lissajous-macos-m4 main.go",
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "tags": ["gif"]
+  },
+  {
+    "label": "Generate Quantum Field GIF",
+    "command": "go run shape/main.go > quantum.gif && open quantum.gif",
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "tags": ["gif"]
+  },
+
+  // Run Servers (for testing in browser)
+  {
+    "label": "Run Main Server",
+    "command": "go run main.go",
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "tags": ["server"]
+  },
+  {
+    "label": "Run Shape Server",
+    "command": "go run shape/main.go",
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "tags": ["server"]
+  },
+
+  // Code Quality
+  {
+    "label": "Format & Vet",
+    "command": "go fmt ./... && go vet ./...",
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "tags": ["quality"]
+  }
+]
